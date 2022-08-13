@@ -1,0 +1,10 @@
+spring:
+  data:
+    mongodb:
+      database: utcn-forum
+      uri: mongodb://127.0.0.1:27017/utcn-forum
+  main:
+    allow-bean-definition-overriding: true
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
