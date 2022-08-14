@@ -15,9 +15,7 @@ public class User implements Serializable {
     @Id
     private ObjectId id;
 
-    private String firstName;
-
-    private String lastName;
+    private String displayName;
 
     private String email;
 

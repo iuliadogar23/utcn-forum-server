@@ -12,8 +12,7 @@ public class ByUser implements Serializable {
     @Field("id")
     private ObjectId id;
 
-    private String firstName;
+    private String displayName;
 
-    private String lastName;
 
 }
