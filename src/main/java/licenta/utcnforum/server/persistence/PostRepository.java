@@ -15,7 +15,7 @@ public interface PostRepository extends MongoRepository<Post, ObjectId> {
     @Query(value = "{email: ?0}")
     List<Post> getAllByUtcnUser(String utcnEmail);
 
-    @Query(value = "{ 'comments': {'$in' : ?0 }}")
+    @Query(value = "{ 'categories': {'$in' : ?0 }}")
     List<Post> getAllByCategories(List<Category> categories);
 
 }

@@ -19,8 +19,6 @@ public class User implements Serializable {
 
     private String email;
 
-    private String password;
-
     private boolean isUtcn;
 
     private List<Post> likedPosts;

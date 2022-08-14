@@ -23,8 +23,10 @@ public class Post implements Serializable {
 
     private int likes;
 
-    private int dislike;
+    private int dislikes;
 
     private List<Comment> comments;
+
+    private List<Category> categories;
 
 }
