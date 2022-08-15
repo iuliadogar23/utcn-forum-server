@@ -1,23 +1,46 @@
 package licenta.utcnforum.server.service;
 
 import licenta.utcnforum.server.model.Category;
+import licenta.utcnforum.server.model.Comment;
 import licenta.utcnforum.server.model.Post;
+import licenta.utcnforum.server.model.User;
 import licenta.utcnforum.server.persistence.PostRepository;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class PostService implements ServiceInterface<Post>{
 
     @Autowired
     private PostRepository postRepository;
+    @Autowired
+    private UserService userService;
 
     @Override
     public Post upsert(Post saveObject) {
+        Long date = Calendar.getInstance().getTimeInMillis();
+        if (saveObject.getId() == null)
+        {
+            saveObject.setId(UUID.randomUUID());
+            saveObject.setDate(date);
+            if (saveObject.getUser()!=null && saveObject.getUser().getId()!=null) {
+                User user = userService.findById(saveObject.getUser().getId());
+                if (user.getUserPosts()==null)
+                    user.setUserPosts(new ArrayList<>());
+                user.getUserPosts().add(saveObject);
+                userService.upsert(user);
+            }
+        }
+        if (saveObject.getComments()!=null && !saveObject.getComments().isEmpty())
+            for (Comment comment: saveObject.getComments()) {
+                if (comment.getId()==null) {
+                    comment.setId(UUID.randomUUID());
+                    comment.setDate(date);
+                }
+            }
         return postRepository.save(saveObject);
     }
 
@@ -28,16 +51,16 @@ public class PostService implements ServiceInterface<Post>{
 
     public List<Post> getAllByUtcnUser()
     {
-        return getPostsDescending(postRepository.getAllByUserDisplayName("Admin"));
+        return getPostsDescending(userService.getAllPostsByAdminUser());
     }
 
     public List<Post> getAllByCategories(List<Category> categories)
     {
-        return getPostsDescending(postRepository.getAllByCategories(categories));
+        return getPostsDescending(postRepository.getAllByCategories(categories.stream().map(c->c.getId()).collect(Collectors.toList())));
     }
 
     @Override
-    public Post findById(ObjectId id) {
+    public Post findById(UUID id) {
         return postRepository.findById(id).orElseThrow();
     }
 

@@ -1,7 +1,6 @@
 package licenta.utcnforum.server.model;
 
 import lombok.Data;
-import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -24,7 +23,7 @@ public class User implements Serializable {
 
     private List<Post> likedPosts;
 
-    private List<Category> likedCategory;
+    private List<Category> likedCategories;
 
     private List<Post> userPosts;
 

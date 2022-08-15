@@ -2,12 +2,12 @@ package licenta.utcnforum.server.controller;
 
 import licenta.utcnforum.server.model.Category;
 import licenta.utcnforum.server.service.CategoryService;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @CrossOrigin
 @RestController
@@ -24,7 +24,7 @@ public class CategoryController {
     }
 
     @GetMapping("/id")
-    public ResponseEntity<Category> getById(@RequestBody ObjectId id)
+    public ResponseEntity<Category> getById(@RequestParam UUID id)
     {
         return ResponseEntity.ok(categoryService.findById(id));
     }

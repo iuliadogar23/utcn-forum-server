@@ -1,14 +1,17 @@
 package licenta.utcnforum.server.controller;
 
+import com.google.common.reflect.TypeToken;
+import com.google.gson.Gson;
 import licenta.utcnforum.server.model.Category;
 import licenta.utcnforum.server.model.Post;
 import licenta.utcnforum.server.service.PostService;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @CrossOrigin
 @RestController
@@ -25,7 +28,7 @@ public class PostController {
     }
 
     @GetMapping("/id")
-    public ResponseEntity<Post> getById(@RequestBody ObjectId id)
+    public ResponseEntity<Post> getById(@RequestParam UUID id)
     {
         return ResponseEntity.ok(postService.findById(id));
     }
@@ -37,9 +40,11 @@ public class PostController {
     }
 
     @GetMapping("/categories")
-    public ResponseEntity<List<Post>> getAllPostsByCategory(@RequestParam List<Category> categories)
+    public ResponseEntity<List<Post>> getAllPostsByCategory(@RequestParam String categories)
     {
-        return ResponseEntity.ok(postService.getAllByCategories(categories));
+        Gson gson = new Gson();
+        List<Category> categoryList = gson.fromJson(categories, new TypeToken<ArrayList<Category>>(){}.getType());
+        return ResponseEntity.ok(postService.getAllByCategories(categoryList));
     }
 
     @PostMapping("/upsert")

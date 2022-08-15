@@ -1,8 +1,7 @@
 package licenta.utcnforum.server.service;
 
-import org.bson.types.ObjectId;
-
 import java.util.List;
+import java.util.UUID;
 
 public interface ServiceInterface<T> {
 
@@ -10,7 +9,7 @@ public interface ServiceInterface<T> {
 
     List<T> getAll();
 
-    T findById(ObjectId id);
+    T findById(UUID id);
 
     void delete(T object);
 }
