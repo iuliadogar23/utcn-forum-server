@@ -19,8 +19,8 @@ public class UserService implements ServiceInterface<User> {
 
     @Override
     public User upsert(User saveObject) {
-        if (saveObject.getUid() == null)
-            saveObject.setUid(UUID.randomUUID());
+        if (saveObject.getUuid() == null)
+            saveObject.setUuid(UUID.randomUUID());
         return userRepository.save(saveObject);
     }
 

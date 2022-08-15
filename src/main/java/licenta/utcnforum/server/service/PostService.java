@@ -23,9 +23,9 @@ public class PostService implements ServiceInterface<Post>{
     @Override
     public Post upsert(Post saveObject) {
         Long date = Calendar.getInstance().getTimeInMillis();
-        if (saveObject.getUid() == null)
+        if (saveObject.getUuid() == null)
         {
-            saveObject.setUid(UUID.randomUUID());
+            saveObject.setUuid(UUID.randomUUID());
             saveObject.setDate(date);
             if (saveObject.getUser()!=null && saveObject.getUser().getId()!=null) {
                 User user = userService.findById(saveObject.getUser().getId());
@@ -37,8 +37,8 @@ public class PostService implements ServiceInterface<Post>{
         }
         if (saveObject.getComments()!=null && !saveObject.getComments().isEmpty())
             for (Comment comment: saveObject.getComments()) {
-                if (comment.getUid()==null) {
-                    comment.setUid(UUID.randomUUID());
+                if (comment.getId()==null) {
+                    comment.setId(UUID.randomUUID());
                     comment.setDate(date);
                 }
             }
@@ -57,7 +57,7 @@ public class PostService implements ServiceInterface<Post>{
 
     public List<Post> getAllByCategories(List<Category> categories)
     {
-        return getPostsDescending(postRepository.getAllByCategories(categories.stream().map(c->c.getUid()).collect(Collectors.toList())));
+        return getPostsDescending(postRepository.getAllByCategories(categories.stream().map(c->c.getUuid()).collect(Collectors.toList())));
     }
 
     @Override

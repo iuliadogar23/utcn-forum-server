@@ -17,8 +17,8 @@ public class CategoryService implements ServiceInterface<Category> {
 
     @Override
     public Category upsert(Category saveObject) {
-        if (saveObject.getUid()==null)
-            saveObject.setUid(UUID.randomUUID());
+        if (saveObject.getUuid()==null)
+            saveObject.setUuid(UUID.randomUUID());
         return categoryRepository.save(saveObject);
     }
 

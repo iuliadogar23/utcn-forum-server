@@ -15,7 +15,7 @@ public class Category implements Serializable {
     @Id
     private ObjectId id;
 
-    private UUID uid;
+    private UUID uuid;
 
     private String name;
 

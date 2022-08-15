@@ -11,9 +11,7 @@ import java.util.UUID;
 public class Comment implements Serializable {
 
     @Field("id")
-    private ObjectId id;
-
-    private UUID uid;
+    private UUID id;
 
     private String text;
 

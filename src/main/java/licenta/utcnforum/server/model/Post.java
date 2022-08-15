@@ -16,7 +16,7 @@ public class Post implements Serializable {
     @Id
     private ObjectId id;
 
-    private UUID uid;
+    private UUID uuid;
 
     private String text;
 
