@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.UUID;
 
 @Data
 @Document("post")
@@ -14,6 +15,8 @@ public class Post implements Serializable {
 
     @Id
     private ObjectId id;
+
+    private UUID uid;
 
     private String text;
 

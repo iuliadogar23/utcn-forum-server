@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class CategoryService implements ServiceInterface<Category> {
@@ -16,6 +17,8 @@ public class CategoryService implements ServiceInterface<Category> {
 
     @Override
     public Category upsert(Category saveObject) {
+        if (saveObject.getUid()==null)
+            saveObject.setUid(UUID.randomUUID());
         return categoryRepository.save(saveObject);
     }
 
