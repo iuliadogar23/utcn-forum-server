@@ -23,8 +23,8 @@ public class UserController {
         return ResponseEntity.ok(userService.getAll());
     }
 
-    @GetMapping("/id")
-    public ResponseEntity<User> getById(@RequestBody ObjectId id)
+    @GetMapping("/{id}")
+    public ResponseEntity<User> getById(@PathVariable ObjectId id)
     {
         return ResponseEntity.ok(userService.findById(id));
     }

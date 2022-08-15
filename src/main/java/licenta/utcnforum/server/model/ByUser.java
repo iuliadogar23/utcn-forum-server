@@ -11,7 +11,9 @@ import java.util.UUID;
 public class ByUser implements Serializable {
 
     @Field("id")
-    private UUID id;
+    private ObjectId id;
+
+    private String uid;
 
     private String displayName;
 

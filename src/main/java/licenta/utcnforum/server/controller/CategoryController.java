@@ -23,8 +23,8 @@ public class CategoryController {
         return ResponseEntity.ok(categoryService.getAll());
     }
 
-    @GetMapping("/id")
-    public ResponseEntity<Category> getById(@RequestBody ObjectId id)
+    @GetMapping("/{id}")
+    public ResponseEntity<Category> getById(@PathVariable ObjectId id)
     {
         return ResponseEntity.ok(categoryService.findById(id));
     }

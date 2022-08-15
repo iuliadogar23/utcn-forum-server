@@ -24,8 +24,8 @@ public class PostController {
         return ResponseEntity.ok(postService.getAll());
     }
 
-    @GetMapping("/id")
-    public ResponseEntity<Post> getById(@RequestBody ObjectId id)
+    @GetMapping("/{id}")
+    public ResponseEntity<Post> getById(@PathVariable ObjectId id)
     {
         return ResponseEntity.ok(postService.findById(id));
     }

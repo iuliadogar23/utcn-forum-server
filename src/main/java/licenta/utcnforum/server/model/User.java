@@ -14,7 +14,9 @@ import java.util.UUID;
 public class User implements Serializable {
 
     @Id
-    private UUID id;
+    private ObjectId id;
+
+    private String uid;
 
     private String displayName;
 
