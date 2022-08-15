@@ -37,7 +37,7 @@ public class PostController {
     }
 
     @GetMapping("/categories")
-    public ResponseEntity<List<Post>> getAllPostsByCategory(@RequestBody List<Category> categories)
+    public ResponseEntity<List<Post>> getAllPostsByCategory(@RequestParam List<Category> categories)
     {
         return ResponseEntity.ok(postService.getAllByCategories(categories));
     }

@@ -12,8 +12,9 @@ import java.util.List;
 @Repository
 public interface PostRepository extends MongoRepository<Post, ObjectId> {
 
-    @Query(value = "{email: ?0}")
-    List<Post> getAllByUtcnUser(String utcnEmail);
+    @Query(value = "{displayName: ?0}")
+    List<Post> getAllByUserDisplayName(String displayName);
+
 
     @Query(value = "{ 'categories': {'$in' : ?0 }}")
     List<Post> getAllByCategories(List<Category> categories);

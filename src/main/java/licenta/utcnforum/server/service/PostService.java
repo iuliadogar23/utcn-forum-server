@@ -28,7 +28,7 @@ public class PostService implements ServiceInterface<Post>{
 
     public List<Post> getAllByUtcnUser()
     {
-        return getPostsDescending(postRepository.getAllByUtcnUser("adminuser@utcn.com"));
+        return getPostsDescending(postRepository.getAllByUserDisplayName("Admin"));
     }
 
     public List<Post> getAllByCategories(List<Category> categories)
