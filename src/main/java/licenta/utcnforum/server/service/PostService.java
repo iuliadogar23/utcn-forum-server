@@ -22,12 +22,12 @@ public class PostService implements ServiceInterface<Post>{
     @Override
     public Post upsert(Post saveObject) {
         Long date = Calendar.getInstance().getTimeInMillis();
-        if (saveObject.getId() == null)
+        if (saveObject.getUuid() == null)
         {
-            saveObject.setId(UUID.randomUUID());
+            saveObject.setUuid(UUID.randomUUID());
             saveObject.setDate(date);
-            if (saveObject.getUser()!=null && saveObject.getUser().getId()!=null) {
-                User user = userService.findById(saveObject.getUser().getId());
+            if (saveObject.getUser()!=null && saveObject.getUser().getUuid()!=null) {
+                User user = userService.findById(saveObject.getUser().getUuid());
                 if (user.getUserPosts()==null)
                     user.setUserPosts(new ArrayList<>());
                 user.getUserPosts().add(saveObject);

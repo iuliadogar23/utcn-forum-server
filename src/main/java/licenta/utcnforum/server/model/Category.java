@@ -1,6 +1,7 @@
 package licenta.utcnforum.server.model;
 
 import lombok.Data;
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -12,7 +13,9 @@ import java.util.UUID;
 public class Category implements Serializable {
 
     @Id
-    private UUID id;
+    private ObjectId id;
+
+    private UUID uuid;
 
     private String name;
 
