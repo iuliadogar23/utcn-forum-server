@@ -26,6 +26,8 @@ public class User implements Serializable {
 
     private boolean isUtcn;
 
+    private String photoURL;
+
     private List<Post> likedPosts;
 
     private List<Category> likedCategory;
