@@ -1,5 +1,6 @@
 package licenta.utcnforum.server.service;
 
+import licenta.utcnforum.server.model.Category;
 import licenta.utcnforum.server.model.Post;
 import licenta.utcnforum.server.model.User;
 import licenta.utcnforum.server.persistence.UserRepository;
@@ -46,5 +47,10 @@ public class UserService implements ServiceInterface<User> {
                 .filter(u -> u != null)
                 .flatMap(List::stream)
                 .collect(Collectors.toList());
+    }
+
+    public List<Category> getFollowCategoriesForUser(String uuid)
+    {
+        return userRepository.findByUuid(UUID.fromString(uuid)).orElseThrow().getLikedCategory();
     }
 }

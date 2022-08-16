@@ -17,7 +17,7 @@ public interface PostRepository extends MongoRepository<Post, ObjectId> {
     List<Post> getAllByUserDisplayName(String displayName);
 
 
-    @Query(value = "{ 'categories': { $elemMatch: { 'uid' : {'$in' : ?0 } } }}")
+    @Query(value = "{ 'categories': { $elemMatch: { 'uuid' : {'$in' : ?0 } } }}")
     List<Post> getAllByCategories(List<UUID> categories);
 
 

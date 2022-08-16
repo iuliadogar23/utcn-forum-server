@@ -40,12 +40,16 @@ public class PostController {
         return ResponseEntity.ok(postService.getAllByUtcnUser());
     }
 
-    @GetMapping("/categories")
-    public ResponseEntity<List<Post>> getAllPostsByCategory(@RequestParam String categories)
+    @GetMapping("/category")
+    public ResponseEntity<List<Post>> getAllPostsByCategory(@RequestParam String categoryUid)
     {
-        Gson gson = new Gson();
-        List<Category> categoryList = gson.fromJson(categories, new TypeToken<ArrayList<Category>>(){}.getType());
-        return ResponseEntity.ok(postService.getAllByCategories(categoryList));
+        return ResponseEntity.ok(postService.getAllByCategoryUid(categoryUid));
+    }
+
+    @GetMapping("/followed-categories")
+    public ResponseEntity<List<Post>> getAllPostsForFollowedCategories(@RequestParam String userUuid)
+    {
+        return ResponseEntity.ok(postService.getAllByFollowedCategories(userUuid));
     }
 
     @PostMapping("/upsert")

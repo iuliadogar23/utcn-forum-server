@@ -36,4 +36,9 @@ public class CategoryService implements ServiceInterface<Category> {
     public void delete(Category object) {
         categoryRepository.delete(object);
     }
+
+    public Category getCategoryByUid(UUID uuid)
+    {
+        return categoryRepository.findByUuid(uuid).orElseThrow();
+    }
 }

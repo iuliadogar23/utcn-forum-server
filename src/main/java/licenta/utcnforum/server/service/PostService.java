@@ -19,6 +19,8 @@ public class PostService implements ServiceInterface<Post>{
     private PostRepository postRepository;
     @Autowired
     private UserService userService;
+    @Autowired
+    private CategoryService categoryService;
 
     @Override
     public Post upsert(Post saveObject) {
@@ -55,8 +57,21 @@ public class PostService implements ServiceInterface<Post>{
         return getPostsDescending(userService.getAllPostsByAdminUser());
     }
 
-    public List<Post> getAllByCategories(List<Category> categories)
+    public List<Post> getAllByCategoryUid(String categoryUid)
     {
+        List<Category> categories = new ArrayList<>();
+        categories.add(categoryService.getCategoryByUid(UUID.fromString(categoryUid)));
+        return getAllByCategories(categories);
+    }
+
+    public List<Post> getAllByFollowedCategories(String userUuid)
+    {
+        return getAllByCategories(userService.getFollowCategoriesForUser(userUuid));
+    }
+
+    private List<Post> getAllByCategories(List<Category> categories)
+    {
+
         return getPostsDescending(postRepository.getAllByCategories(categories.stream().map(c->c.getUuid()).collect(Collectors.toList())));
     }
 
