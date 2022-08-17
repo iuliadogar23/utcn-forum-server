@@ -17,6 +17,8 @@ public class ByUser implements Serializable {
 
     private UUID uuid;
 
+    private boolean utcn;
+
     private String photoURL;
 
     private String displayName;
