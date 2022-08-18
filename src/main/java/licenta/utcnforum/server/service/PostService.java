@@ -87,7 +87,7 @@ public class PostService implements ServiceInterface<Post>{
 
     private List<Post> getPostsDescending(List<Post> posts)
     {
-        posts.sort(Comparator.comparing(Post::getDate));
+        posts.sort(Comparator.comparing(Post::getDate).reversed());
         return posts;
     }
 

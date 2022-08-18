@@ -15,5 +15,7 @@ public interface UserRepository extends MongoRepository<User, ObjectId> {
     @Query(value = "{isUtcn: true}")
     List<User> getAllByAdmin();
 
+    Optional<User> findByUid(String uid);
+
     Optional<User> findByUuid(UUID uuid);
 }

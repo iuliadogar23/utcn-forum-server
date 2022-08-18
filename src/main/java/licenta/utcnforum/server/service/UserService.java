@@ -20,8 +20,13 @@ public class UserService implements ServiceInterface<User> {
 
     @Override
     public User upsert(User saveObject) {
-        if (saveObject.getUuid() == null)
+        User user = userRepository.findByUid(saveObject.getUid()).orElse(null);
+
+        if (user == null)
             saveObject.setUuid(UUID.randomUUID());
+        if (saveObject.getId()==null && user!=null )
+            return user;
+
         return userRepository.save(saveObject);
     }
 
