@@ -12,7 +12,7 @@ import java.util.UUID;
 
 @Repository
 public interface UserRepository extends MongoRepository<User, ObjectId> {
-    @Query(value = "{isUtcn: true}")
+    @Query(value = "{utcn: true}")
     List<User> getAllByAdmin();
 
     Optional<User> findByUid(String uid);

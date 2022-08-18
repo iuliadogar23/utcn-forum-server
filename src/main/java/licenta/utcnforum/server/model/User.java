@@ -24,9 +24,13 @@ public class User implements Serializable {
 
     private String email;
 
-    private boolean isUtcn;
+    private boolean utcn;
+
+    private String photoURL;
 
     private List<Post> likedPosts;
+    
+    private List<Post> dislikedPosts;
 
     private List<Category> likedCategory;
 

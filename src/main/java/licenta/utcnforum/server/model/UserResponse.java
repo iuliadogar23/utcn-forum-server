@@ -16,7 +16,7 @@ public class UserResponse {
 
     private String email;
 
-    private boolean isUtcn;
+    private boolean utcn;
 
     private List<Post> likedPosts;
 
