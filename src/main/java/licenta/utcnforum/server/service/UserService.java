@@ -47,15 +47,16 @@ public class UserService implements ServiceInterface<User> {
 
     public List<Post> getAllPostsByAdminUser() {
 
-        return userRepository.getAllByAdmin().stream()
-                .map(u -> u.getUserPosts())
-                .filter(u -> u != null)
-                .flatMap(List::stream)
+        return userRepository.getAllByAdmin().stream() //list<User>
+                .map(u -> u.getUserPosts()) //pentru fiecare User din lista -> List<Post> userPosts a userului admin -> rez. final: list<List<Post>>
+                .filter(u -> u != null) //elimiam lista de posturi userilor fara nimic postat
+                .flatMap(List::stream) //List<List<Post>> -> List<Post> all together in a big list
                 .collect(Collectors.toList());
     }
 
     public List<Category> getFollowCategoriesForUser(String uuid)
     {
-        return userRepository.findByUuid(UUID.fromString(uuid)).orElseThrow().getLikedCategory();
+        User loggedUser = userRepository.findByUuid(UUID.fromString(uuid)).orElseThrow();
+        return loggedUser.getLikedCategory();
     }
 }

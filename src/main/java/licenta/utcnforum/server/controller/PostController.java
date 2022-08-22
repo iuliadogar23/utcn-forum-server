@@ -1,8 +1,5 @@
 package licenta.utcnforum.server.controller;
 
-import com.google.common.reflect.TypeToken;
-import com.google.gson.Gson;
-import licenta.utcnforum.server.model.Category;
 import licenta.utcnforum.server.model.Post;
 import licenta.utcnforum.server.service.PostService;
 import org.bson.types.ObjectId;
@@ -10,9 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @CrossOrigin
 @RestController

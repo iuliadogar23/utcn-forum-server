@@ -2,7 +2,7 @@ spring:
   data:
     mongodb:
       database: utcn-forum
-      uri: mongodb+srv://vexa:admin@cluster0.2qcbzhm.mongodb.net/?retryWrites=true&w=majority
+      uri: mongodb+srv://vexa:admin@cluster0.l8x2swh.mongodb.net/?retryWrites=true&w=majority
   main:
     allow-bean-definition-overriding: true
   mvc:

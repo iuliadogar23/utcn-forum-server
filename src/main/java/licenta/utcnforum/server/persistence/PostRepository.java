@@ -13,13 +13,7 @@ import java.util.UUID;
 @Repository
 public interface PostRepository extends MongoRepository<Post, ObjectId> {
 
-    @Query(value = "{displayName: ?0}")
-    List<Post> getAllByUserDisplayName(String displayName);
-
-
     @Query(value = "{ 'categories': { $elemMatch: { 'uuid' : {'$in' : ?0 } } }}")
     List<Post> getAllByCategories(List<UUID> categories);
-
-
 
 }
