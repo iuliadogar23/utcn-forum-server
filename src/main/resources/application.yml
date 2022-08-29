@@ -13,13 +13,14 @@ spring:
     host: smtp.gmail.com
     port: 587
     username: andreipoptest@gmail.com
-    password: Hedwig77!
+    password: jaygfgisrukqzsjn
     properties:
       mail:
         smtp:
           auth: true;
           starttls:
             enable: true
+
 app:
   jwt:
     secret: ArbitrarySercetKey
@@ -28,5 +29,3 @@ app:
       prefix: Bearer
     header:
       string: Authorization
-
-#      jaygfgisrukqzsjn

@@ -113,11 +113,12 @@ public class PostService implements ServiceInterface<Post>{
                     .append("\n")
                     .append("\n")
                     .append("Vezi comentariul pe site: ")
-                    .append("http://localhost:4200/post");
+                    .append("http://localhost:4200/home");
             EmailDetails emailDetails = new EmailDetails();
             emailDetails.setMsgBody(message.toString());
             emailDetails.setSubject("Comentariu nou de la " + comment.getUser().getDisplayName());
             emailDetails.setRecipient(user.getEmail());
+            return emailDetails;
         }
         return null;
     }
