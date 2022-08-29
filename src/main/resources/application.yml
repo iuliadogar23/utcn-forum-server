@@ -5,6 +5,28 @@ spring:
       uri: mongodb+srv://vexa:admin@cluster0.l8x2swh.mongodb.net/?retryWrites=true&w=majority
   main:
     allow-bean-definition-overriding: true
+    allow-circular-references: true
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: andreipoptest@gmail.com
+    password: Hedwig77!
+    properties:
+      mail:
+        smtp:
+          auth: true;
+          starttls:
+            enable: true
+app:
+  jwt:
+    secret: ArbitrarySercetKey
+    expiration-in-ms: 864000
+    token:
+      prefix: Bearer
+    header:
+      string: Authorization
+
+#      jaygfgisrukqzsjn

@@ -1,5 +1,7 @@
 package licenta.utcnforum.server.service;
 
+import licenta.utcnforum.server.email.EmailDetails;
+import licenta.utcnforum.server.email.EmailService;
 import licenta.utcnforum.server.model.Category;
 import licenta.utcnforum.server.model.Comment;
 import licenta.utcnforum.server.model.Post;
@@ -21,6 +23,8 @@ public class PostService implements ServiceInterface<Post>{
     private UserService userService;
     @Autowired
     private CategoryService categoryService;
+    @Autowired
+    private EmailService emailService;
 
     @Override
     public Post upsert(Post saveObject) {
@@ -33,16 +37,21 @@ public class PostService implements ServiceInterface<Post>{
                 User user = userService.findById(saveObject.getUser().getId());
                 if (user.getUserPosts()==null)
                     user.setUserPosts(new ArrayList<>());
+                if(saveObject.getUser().isUtcn()!=user.isUtcn())
+                    user.setUtcn(saveObject.getUser().isUtcn());
                 user.getUserPosts().add(saveObject);
                 userService.upsert(user);
             }
         }
+        List<Comment> comments = new ArrayList<>();
         if (saveObject.getComments()!=null && !saveObject.getComments().isEmpty())
             for (Comment comment: saveObject.getComments()) {
                 if (comment.getId()==null) {
                     comment.setId(UUID.randomUUID());
                     comment.setDate(date);
+                    emailService.sendSimpleMail(setupEmail(saveObject, comment));
                 }
+                comments.add(comment);
             }
         return postRepository.save(saveObject);
     }
@@ -89,6 +98,28 @@ public class PostService implements ServiceInterface<Post>{
     {
         posts.sort(Comparator.comparing(Post::getDate).reversed());
         return posts;
+    }
+
+    private EmailDetails setupEmail(Post post, Comment comment)
+    {
+        StringBuilder message = new StringBuilder();
+        User user = userService.getByUid(post.getUser().getUid());
+
+        if (user!=null){
+            message.append(comment.getUser().getDisplayName())
+                    .append(" a adaugat un comentariu nou la urmatorul post:")
+                    .append("\n")
+                    .append(post.getText())
+                    .append("\n")
+                    .append("\n")
+                    .append("Vezi comentariul pe site: ")
+                    .append("http://localhost:4200/post");
+            EmailDetails emailDetails = new EmailDetails();
+            emailDetails.setMsgBody(message.toString());
+            emailDetails.setSubject("Comentariu nou de la " + comment.getUser().getDisplayName());
+            emailDetails.setRecipient(user.getEmail());
+        }
+        return null;
     }
 
 }

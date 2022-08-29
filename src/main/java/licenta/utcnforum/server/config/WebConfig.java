@@ -12,17 +12,6 @@ import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 public class WebConfig {
 
     @Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedOrigins("*").allowedMethods("GET", "HEAD", "POST", "PUT", "OPTIONS", "DELETE");
-            }
-        };
-    }
-
-
-    @Bean
     public Jackson2ObjectMapperBuilderCustomizer jsonCustomizer() {
         return builder->builder.serializerByType(ObjectId.class, new ToStringSerializer());
     }

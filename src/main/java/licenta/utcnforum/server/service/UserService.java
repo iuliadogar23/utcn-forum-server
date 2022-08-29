@@ -59,4 +59,9 @@ public class UserService implements ServiceInterface<User> {
         User loggedUser = userRepository.findByUuid(UUID.fromString(uuid)).orElseThrow();
         return loggedUser.getLikedCategory();
     }
+
+    public User getByUid(String uid)
+    {
+        return userRepository.findByUid(uid).orElse(null);
+    }
 }
